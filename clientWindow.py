@@ -37,7 +37,7 @@ class mainWindow(QWidget):
         self.setLayout(loginlayout)
     def login(self):
         password=self.password.text()
-        secret=requests.get("https://myncutdev.ncut.edu.cn/getauth").text
+        secret=requests.get("https://myncut.ncut.edu.cn/getauth").text
         if password!=secret:
             QMessageBox.warning(self,"密码错误","    密码错误   ")
         else:
@@ -117,16 +117,15 @@ class clientWindow(QWidget):
         self.setLayout(wholeLayout)
     def makefun(self,index):
         def newsUpdate():
-            newsLink=self.newsList[index].text()
-            imgLink=self.newsList[index*2+1].text()
-            print(index)
-            requests.post("https://myncutdev.ncut.edu.cn/storedata",{"msgUrl":newsLink,"imgUrl":imgLink,"type":"banner","index":str(index)})
+            newsLink=self.newsList[2*index].text()
+            imgLink=self.newsList[2*index+1].text()
+            requests.post("https://myncut.ncut.edu.cn/storedata",{"msgUrl":newsLink,"imgUrl":imgLink,"type":"banner","index":str(index)})
         return newsUpdate
 
     def makefun_indorm(self,index):
         def informUpate():
             inform=self.infromList[index].text()
-            requests.post("https://myncutdev.ncut.edu.cn/storedata",data=({"text":inform,"type":"notice","index":str(index)}))
+            requests.post("https://myncut.ncut.edu.cn/storedata",data=({"text":inform,"type":"notice","index":str(index)}))
 
         return informUpate
 if __name__=="__main__":
